@@ -12,7 +12,7 @@ public class Transaction {
    private LocalDate date;
    private String type;
 
-   public Transaction(String transactionID, double amount) {
+   public Transaction(String transactionID, double amount, String type) {
       this.transactionID = transactionID;
       this.amount = amount;
       this.date = LocalDate.now();

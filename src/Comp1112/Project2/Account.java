@@ -18,13 +18,13 @@ public abstract class Account {
 
    public void deposit(double amount) {
       balance += amount;
-      TRANSACTION_HISTORY.add(new Transaction("Deposit", amount));
+      TRANSACTION_HISTORY.add(new Transaction("Deposit", amount, "Deposit"));
    }
 
    public void withdraw(double amount) {
       if (balance >= amount) {
          balance -= amount;
-         TRANSACTION_HISTORY.add(new Transaction("Withdrawal", amount));
+         TRANSACTION_HISTORY.add(new Transaction("Withdrawal", amount, "Withdraw"));
       } else {
          System.out.println("Insufficient balance.");
       }
@@ -34,7 +34,7 @@ public abstract class Account {
       if (balance >= amount) {
          balance -= amount;
          toAccount.deposit(amount);
-         TRANSACTION_HISTORY.add(new Transaction("Transfer to " + toAccount.getAccountNumber(), amount));
+         TRANSACTION_HISTORY.add(new Transaction("Transfer to " + toAccount.getAccountNumber(), amount, "Transfer"));
       } else {
          System.out.println("Insufficient balance for transfer.");
       }
@@ -75,12 +75,13 @@ public abstract class Account {
       return "Account Number: " + accountNumber + "\n" + "Balance: " + balance + "\n" + "Owner: " + owner.getName() + "\n" + "Transaction History: " + TRANSACTION_HISTORY;
    }
 
+
    @Override
    public boolean equals(Object obj) {
       if (this == obj) return true;
       if (obj == null || getClass() != obj.getClass()) return false;
-//      Account account = (Account) obj;
-//      return Double.compare(account.balance, balance) == 0 && accountNumber.equals(account.accountNumber) && owner.equals(account.owner);
+      Account account = (Account) obj;
+      return Double.compare(account.balance, balance) == 0 && accountNumber.equals(account.accountNumber) && owner.equals(account.owner);
    }
 }
 

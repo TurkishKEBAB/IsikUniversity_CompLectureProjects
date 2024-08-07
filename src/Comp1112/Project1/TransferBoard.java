@@ -1,4 +1,4 @@
-package Project;
+package Comp1112.Project1;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,7 @@ class TransferBoard {
    public TransferBoard() {
       setPlayers(new ArrayList<>());
       setTeams(new ArrayList<>());
+      setContracts(new ArrayList<>());
       populatePlayers();
       populateTeams();
    }
@@ -39,40 +40,25 @@ class TransferBoard {
    }
 
    public String makeContract(String playerName, String teamName, String contractType, double contractValue) {
-      //algorithm step 1
       Player player = findPlayer(playerName);
-      if (player == null) return "UnknownPlayer";
+      if (player == null) return "Unknown player: " + playerName;
 
-      //algorithm step 2
       Team team = findTeam(teamName);
-      if (team == null) {
-         return "UnknownTeam";
-      }
+      if (team == null) return "Unknown team: " + teamName;
 
-      //algorithm step 3
       if (team.getSize() == Team.maxTeamSize) {
-         return "ExceedingMaxNumPlayers";
-      }
-
-      if (player == null) {
-         return STR."Unknown player: \{playerName}";
-      }
-      if (team == null) {
-         return STR."Unknown team: \{teamName}";
+         return "Team " + teamName + " has reached the maximum number of players.";
       }
 
       for (Contract contract : getContracts()) {
          if (contract.getPlayer() == player && contract.getTeam() == team)
-            return STR."Existing contract between \{playerName} and \{teamName}";
+            return "Existing contract between " + playerName + " and " + teamName;
       }
 
       for (Contract contract : getContracts()) {
          if (contract.getPlayer() == player && contract.getType().equals("Rented"))
-            return STR."Player \{playerName} already has a rented contract.";
+            return "Player " + playerName + " already has a rented contract.";
       }
-
-      if (team.getSize() >= Team.maxTeamSize)
-         return STR."Team \{teamName} has reached the maximum number of players.";
 
       Contract newContract = new Contract(player, team, contractType, contractValue);
       getContracts().add(newContract);
@@ -81,19 +67,15 @@ class TransferBoard {
       team.setTotalValue(team.getTotalValue() + contractValue);
       player.setMarketValue(contractValue);
 
-      return STR."Successfully contracted \{playerName} to \{teamName}";
+      return "Successfully contracted " + playerName + " to " + teamName;
    }
 
    public String terminateContract(String playerName, String teamName) {
       Player player = findPlayer(playerName);
-      if (player == null) return "UnknownPlayer";
+      if (player == null) return "Unknown player: " + playerName;
 
       Team team = findTeam(teamName);
-      if (team == null) return "UnknownTeam";
-      /*
-      if (team.getSize() > Team.maxTeamSize) {
-      }
-      */
+      if (team == null) return "Unknown team: " + teamName;
 
       Contract contractToRemove = null;
       for (Contract contract : getContracts()) {
@@ -108,10 +90,10 @@ class TransferBoard {
          player.setCurrentTeam(null);
          team.setSize(team.getSize() - 1);
          team.setTotalValue(team.getTotalValue() - contractToRemove.getValue());
-         return STR."Contract between \{playerName} and \{teamName} terminated successfully.";
+         return "Contract between " + playerName + " and " + teamName + " terminated successfully.";
       }
 
-      return STR."No contract found between \{playerName} and \{teamName}";
+      return "No contract found between " + playerName + " and " + teamName;
    }
 
    public ArrayList<Contract> getContracts() {

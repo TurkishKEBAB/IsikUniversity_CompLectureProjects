@@ -1,5 +1,5 @@
 //
-package Project;
+package Comp1112.Project1;
 
 class Contract {
    private Player player;

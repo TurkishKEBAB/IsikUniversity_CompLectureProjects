@@ -1,6 +1,8 @@
 package Comp1111.Project2;
 
-import java.util.*;
+import java.util.Random;
+import java.util.Scanner;
+
 /*
  * @author of this code Yigit Okur (23Soft1040)
  * github.com/TurkishKEBAB

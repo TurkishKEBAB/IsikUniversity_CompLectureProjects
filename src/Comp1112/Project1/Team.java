@@ -1,4 +1,4 @@
-package Project;
+package Comp1112.Project1;
 
 class Team {
    private final String shortName;
@@ -12,7 +12,6 @@ class Team {
       this.fullName = fullName;
       this.totalValue = totalValue;
       this.size = size;
-//    recalculateTotalValue();
    }
 
    public String getShortName() {
@@ -40,6 +39,6 @@ class Team {
    }
 
    public String toString() {
-      return STR."\{shortName}, name=\{fullName}, value: \{totalValue}, size: \{size}";
+      return String.format("%s, name=%s, value=%.2f, size=%d", shortName, fullName, totalValue, size);
    }
 }

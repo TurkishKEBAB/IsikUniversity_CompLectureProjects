@@ -1,13 +1,13 @@
-package Project;
+package Comp1112.Project1;
 
 import java.util.Scanner;
 
 public class SimulateSystem {
-   private static Project.TransferBoard transferBoard;
+   private static TransferBoard transferBoard;
    private static Scanner scanner;
 
    public static void main(String[] args) {
-      setTransferBoard(new Project.TransferBoard());
+      setTransferBoard(new TransferBoard());
       setScanner(new Scanner(System.in));
 
       while (true) {
@@ -27,20 +27,20 @@ public class SimulateSystem {
          switch (choice) {
             case 1:
                System.out.println("All Players:");
-               for (Project.Player player : getTransferBoard().getPlayers()) {
+               for (Player player : getTransferBoard().getPlayers()) {
                   System.out.println(player);
                }
                break;
             case 2:
                System.out.println("All Teams:");
-               for (Project.Team team : getTransferBoard().getTeams()) {
+               for (Team team : getTransferBoard().getTeams()) {
                   System.out.println(team);
                }
                break;
             case 3:
                System.out.println("Teamless Players:");
                boolean hasTeamlessPlayers = false;
-               for (Project.Player player : getTransferBoard().getPlayers()) {
+               for (Player player : getTransferBoard().getPlayers()) {
                   if (player.getCurrentTeam() == null) {
                      System.out.println(player.getName());
                      hasTeamlessPlayers = true;
@@ -77,33 +77,32 @@ public class SimulateSystem {
       }
    }
 
-   private static void printExitInformation(Project.TransferBoard transferBoard) {
+   private static void printExitInformation(TransferBoard transferBoard) {
       System.out.println("For each player with a contract:");
-      for (Project.Player player : transferBoard.getPlayers()) {
+      for (Player player : transferBoard.getPlayers()) {
          if (player.getCurrentTeam() != null) {
-            System.out.println(STR."\{player.getName()} : \{player.getMarketValue()} \{player.getCurrentTeam().getShortName()}");
+            System.out.println(String.format("%s : %.2f %s", player.getName(), player.getMarketValue(), player.getCurrentTeam().getShortName()));
          }
       }
 
       System.out.println("For each team:");
-      for (Project.Team team : transferBoard.getTeams()) {
-         System.out.println(STR."\{team.getShortName()} : \{team.getTotalValue()} \{team.getSize()}");
+      for (Team team : transferBoard.getTeams()) {
+         System.out.println(String.format("%s : %.2f %d", team.getShortName(), team.getTotalValue(), team.getSize()));
       }
 
       System.out.println("For each player without a contract:");
-      for (Project.Player player : transferBoard.getPlayers()) {
+      for (Player player : transferBoard.getPlayers()) {
          if (player.getCurrentTeam() == null) {
             System.out.println(player.getName());
-
          }
       }
    }
 
-   private static Project.TransferBoard getTransferBoard() {
+   private static TransferBoard getTransferBoard() {
       return transferBoard;
    }
 
-   private static void setTransferBoard(Project.TransferBoard transferBoard) {
+   private static void setTransferBoard(TransferBoard transferBoard) {
       SimulateSystem.transferBoard = transferBoard;
    }
 
