@@ -1,3 +1,4 @@
+package Comp1111.Project1;
 
 /*
  * @author of this code Yigit Okur (23Soft1040)
@@ -5,22 +6,20 @@
  */
 
 /*
-Hata Yönetimi: Kullanıcıların yanlış girişler yapabileceğini göz önünde bulundurarak, yanlış girişlere karşı daha iyi bir hata yönetimi ekleyin. Örneğin, menü seçeneklerinde harf yerine sayı girişi yapılırsa, bu durumu ele alacak bir hata mesajı ekleyebilirsiniz.
+Hata Yönetimi: Kullanıcıların yanlış girişler yapabileceğini göz önünde bulundurarak, yanlış girişlere karşı daha iyi bir hata yönetimi ekle. Örneğin, menü seçeneklerinde harf yerine sayı girişi yapılırsa, bu durumu ele alacak bir hata mesajı ekleyebilirsiniz.
 
-Zaman Biçimlendirme: Zamanı biçimlendirme işlemini daha esnek hale getirebilirsiniz. Kullanıcıya farklı zaman dilimlerini veya biçimleri seçme seçeneği ekleyebilirsiniz.
+Zaman Biçimlendirme: Zaman biçimlendirme daha esnek hale getir. Kullanıcıya farklı zaman dilimlerini veya biçimleri seçme seçeneği ekle.
 
-Metin Mesajları ve Arama Geçmişi: Kullanıcıların metin mesajları göndermesine ve çağrı geçmişini görüntülemesine izin veren işlevsellik ekleyebilirsiniz.
+Metin Mesajları, Arama Geçmişi: Kullanıcıların metin mesajları göndermesine ve çağrı geçmişini görüntülemeye izin ver.
 
-Kişi Rehberi Yönetimi: Kullanıcıların kişi rehberine kişi eklemesine, görüntülemesine, düzenlemesine ve silmesine izin veren bir bölüm ekleyebilirsiniz.
+Kişi Rehberi Yönetimi: Kullanıcıların kişi rehberine kişi eklemesine, görüntülemesine, düzenlemesine ve silmesine izin veren bir bölüm.
 
-Oyun Geliştirme: Var olan "GuessNumber" oyununu geliştirebilir veya farklı oyunlar ekleyebilirsiniz.
+Oyun Geliştirme: GuessNumber oyununu geliştir.
 
-Güvenlik ve Verimlilik İyileştirmeleri: Kodu daha güvenli ve verimli hale getirmek için gereksiz döngülerden kaçınabilir, kodu daha modüler hale getirebilir ve tekrar kullanılabilir fonksiyonlar ekleyebilirsiniz.
+Güvenlik ve Verimlilik İyileştirmeleri: Gereksiz döngülerden kaçınabilir.
 
-Kullanıcı Arayüzü Geliştirmeleri: Kullanıcı arayüzünü daha interaktif ve kullanıcı dostu hale getirebilirsiniz. Örneğin, kullanıcıya her adımda ne yapması gerektiği konusunda daha açık talimatlar verebilirsiniz.
- */
-
-package Comp1111.Project1;
+Kullanıcı Arayüzü Geliştirmeleri: Kullanıcı arayüzünü kullanıcı dostu hale getir.
+*/
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -118,13 +117,127 @@ public class Project1 {
                   }
                }
             case 3:
-               // Call/Send Text MesajlarÄ±
+               // Metin Mesajı Gönderme ve Arama Yapma
+               while (true) {
+                  System.out.println("1. Send Text Message\n" + "2. Make a Call\n" + "3. Go Back\n");
+                  System.out.print("Enter your option: ");
+                  int commOption = sc.nextInt();
+
+                  if (commOption == 1) {
+                     System.out.print("Enter the phone number: ");
+                     String phoneNumber = sc.next();
+                     System.out.print("Enter your message: ");
+                     sc.nextLine();  // Consume newline left-over
+                     String message = sc.nextLine();
+                     System.out.println("Message sent to " + phoneNumber + ": " + message);
+                  } else if (commOption == 2) {
+                     System.out.print("Enter the phone number: ");
+                     String phoneNumber = sc.next();
+                     System.out.println("Calling " + phoneNumber + "...");
+                  } else if (commOption == 3) {
+                     System.out.println("Going back to main menu...");
+                     break;
+                  } else {
+                     System.out.println("Invalid option. Please try again.");
+                  }
+               }
                break;
+
             case 4:
-               // Arama GeÃ§miÅŸi
+               System.out.println("Viewing call logs...");
+               String[] callLogs = {"Call to +1234567890 at 10:30 AM", "Call from +0987654321 at 11:00 AM", "Missed call from +1122334455 at 12:15 PM"};
+
+               for (String log : callLogs) {
+                  System.out.println(log);
+               }
+               System.out.println("Going back to main menu...");
                break;
             case 5:
-               // Add/View/Edit/Delete Telefon Rehberi
+               String person1 = null, person2 = null, person3 = null, person4 = null, person5 = null;
+               int contactCount = 0;
+
+               while (true) {
+                  System.out.println("1. Add Contact\n" + "2. View Contacts\n" + "3. Edit Contact\n" + "4. Delete Contact\n" + "5. Go Back\n");
+                  System.out.print("Enter your option: ");
+                  int contactOption = sc.nextInt();
+
+                  if (contactOption == 1) {
+                     if (contactCount < 5) {
+                        System.out.print("Enter contact name: ");
+                        sc.nextLine();  // Consume newline left-over
+                        String contactName = sc.nextLine();
+                        if (contactCount == 0) person1 = contactName;
+                        else if (contactCount == 1) person2 = contactName;
+                        else if (contactCount == 2) person3 = contactName;
+                        else if (contactCount == 3) person4 = contactName;
+                        else if (contactCount == 4) person5 = contactName;
+                        contactCount++;
+                        System.out.println("Contact added: " + contactName);
+                     } else {
+                        System.out.println("Contact list is full. Do you want to delete a contact to add a new one? (yes/no)");
+                        String response = sc.next();
+                        if (response.equalsIgnoreCase("yes")) {
+                           System.out.print("Enter the contact number to delete (1-5): ");
+                           int deleteIndex = sc.nextInt();
+                           if (deleteIndex >= 1 && deleteIndex <= 5) {
+                              if (deleteIndex == 1) person1 = null;
+                              else if (deleteIndex == 2) person2 = null;
+                              else if (deleteIndex == 3) person3 = null;
+                              else if (deleteIndex == 4) person4 = null;
+                              else if (deleteIndex == 5) person5 = null;
+                              contactCount--;
+                              System.out.println("Contact deleted. You can now add a new contact.");
+                           } else {
+                              System.out.println("Invalid contact number.");
+                           }
+                        } else {
+                           System.out.println("Returning to main menu...");
+                        }
+                     }
+                  } else if (contactOption == 2) {
+                     System.out.println("Your contacts:");
+                     if (person1 != null) System.out.println("1. " + person1);
+                     if (person2 != null) System.out.println("2. " + person2);
+                     if (person3 != null) System.out.println("3. " + person3);
+                     if (person4 != null) System.out.println("4. " + person4);
+                     if (person5 != null) System.out.println("5. " + person5);
+                  } else if (contactOption == 3) {
+                     System.out.print("Enter the contact number to edit (1-5): ");
+                     int editIndex = sc.nextInt();
+                     if (editIndex >= 1 && editIndex <= 5) {
+                        System.out.print("Enter new contact name: ");
+                        sc.nextLine();  // Consume newline left-over
+                        String newContactName = sc.nextLine();
+                        if (editIndex == 1) person1 = newContactName;
+                        else if (editIndex == 2) person2 = newContactName;
+                        else if (editIndex == 3) person3 = newContactName;
+                        else if (editIndex == 4) person4 = newContactName;
+                        else if (editIndex == 5) person5 = newContactName;
+                        System.out.println("Contact updated: " + newContactName);
+                     } else {
+                        System.out.println("Invalid contact number.");
+                     }
+                  } else if (contactOption == 4) {
+                     System.out.print("Enter the contact number to delete (1-5): ");
+                     int deleteIndex = sc.nextInt();
+                     if (deleteIndex >= 1 && deleteIndex <= 5) {
+                        if (deleteIndex == 1) person1 = null;
+                        else if (deleteIndex == 2) person2 = null;
+                        else if (deleteIndex == 3) person3 = null;
+                        else if (deleteIndex == 4) person4 = null;
+                        else if (deleteIndex == 5) person5 = null;
+                        contactCount--;
+                        System.out.println("Contact deleted.");
+                     } else {
+                        System.out.println("Invalid contact number.");
+                     }
+                  } else if (contactOption == 5) {
+                     System.out.println("Going back to main menu...");
+                     break;
+                  } else {
+                     System.out.println("Invalid option. Please try again.");
+                  }
+               }
                break;
             case 6:
                boolean GamePlayer = true;
